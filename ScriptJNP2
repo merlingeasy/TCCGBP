@@ -1,0 +1,21 @@
+####Script de configuração provedor 2
+
+
+
+Configure - Entrar no modo de configuração
+
+set system host-name rt_jnp_our_provedor2 - Setar o hostname
+
+commit check
+commit
+
+
+edit protocols bgp group ISP
+set type external
+set local-as 500
+set local-address 100.0.0.2
+set neighbor 100.0.0.1 peer-as 100
+
+show
+
+set routing-option autonomous-system 500
