@@ -1,0 +1,34 @@
+###Script de configuração provedor 1
+Root auth - mudar123
+
+
+Configure - Entrar no modo de configuração
+
+set system host-name rt_jnp_our_provedor1 - Setar o hostname
+
+commit check
+commit
+
+set interfaces ge-0/0/2 unit 0 family inet address 100.0.0.1/30
+
+set interfaces ge-0/0/2 description RT_JNP_to_BGP_PROVEDOR_02
+
+
+edit protocols bgp group ISP
+set type external
+set local-as 100
+set local-address 100.0.0.1
+set neighbor 100.0.0.2 peer-as 500
+
+show
+
+set routing-option autonomous-system 100
+commit
+
+
+configure
+
+set policy-options policy-statement advertise-local term 1 from protocol direct
+set policy-options policy-statement advertise-local term 1 then accept
+set protocol bgp group ISP export advertise-local
+commit
